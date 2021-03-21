@@ -24,8 +24,6 @@ class SuperheroesApplicationTests {
 	private TestRestTemplate testRestTemplate;
 
 
-
-
 	protected Superhero createWonderWoman(){
 		Superhero superhero = new Superhero();
 		superhero.setStrength(2000);
@@ -81,6 +79,7 @@ class SuperheroesApplicationTests {
 
 		ResponseEntity<Superhero> entityDeleted = this.testRestTemplate.getForEntity(String.format( "%s/{id}",SUPERHEROES_RESOURCE_URL), Superhero.class, superheroUpdatedFound.getId());
 		assertThat(entityDeleted.getStatusCode(), is(HttpStatus.NOT_FOUND));
+
 	}
 
 
@@ -102,6 +101,14 @@ class SuperheroesApplicationTests {
 		Iterable<Superhero> superheros = entities.getBody();
 		Long total = StreamSupport.stream(superheros.spliterator(), false).count();
 		assertThat(total , is(2L));
+
+
+		// delete superheroes
+		Map params = new HashMap<>();
+		params.put("id", String.valueOf(entity.getBody()));
+		this.testRestTemplate.delete(String.format("%s/{id}", SUPERHEROES_RESOURCE_URL), params);
+		params.put("id", String.valueOf(entity2.getBody()));
+		this.testRestTemplate.delete(String.format("%s/{id}", SUPERHEROES_RESOURCE_URL), params);
 	}
 
 
@@ -123,6 +130,13 @@ class SuperheroesApplicationTests {
 		findByName("Wonder", 1L);
 		findByName("Spider", 1L);
 		findByName("Flash", 0L);
+
+		// delete superheroes
+		Map params = new HashMap<>();
+		params.put("id", String.valueOf(entity.getBody()));
+		this.testRestTemplate.delete(String.format("%s/{id}", SUPERHEROES_RESOURCE_URL), params);
+		params.put("id", String.valueOf(entity2.getBody()));
+		this.testRestTemplate.delete(String.format("%s/{id}", SUPERHEROES_RESOURCE_URL), params);
 
 	}
 
