@@ -5,10 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +41,6 @@ class SuperheroesApplicationTests {
 		assertThat(superhero.getName(), is("SpiderMan"));
 		assertThat(superhero.getSpeed(), is(20));
 		assertThat(superhero.getStrength(), is(23));
-
 	}
 
 	@Test
@@ -49,6 +52,25 @@ class SuperheroesApplicationTests {
 
 		List<Superhero> superheros = entity.getBody();
 		assertThat(superheros, hasSize(3));
+	}
+
+	@Test
+	public void create() throws Exception {
+		Superhero superhero = new Superhero();
+		superhero.setStrength(2000);
+		superhero.setName("wonderWoman");
+
+		HttpEntity<Superhero> request = new HttpEntity<>(superhero);
+		ResponseEntity<Long> entity = this.testRestTemplate.postForEntity("/superheroes", request, Long.class);
+
+		assertThat(entity.getStatusCode(), is(HttpStatus.CREATED));
+	}
+
+	@Test
+	public void delete() throws Exception {
+		Map<String, String > params = new HashMap<>();
+		params.put("id", "1");
+		this.testRestTemplate.delete("/superheroes/{id}", params);
 	}
 
 
