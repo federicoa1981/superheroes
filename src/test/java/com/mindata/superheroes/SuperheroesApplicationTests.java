@@ -30,7 +30,7 @@ class SuperheroesApplicationTests {
 		Superhero superhero = new Superhero();
 		superhero.setStrength(2000);
 		superhero.setSpeed(500);
-		superhero.setName("wonderWoman");
+		superhero.setName("WonderWoman");
 		return superhero;
 	}
 
@@ -102,6 +102,38 @@ class SuperheroesApplicationTests {
 		Iterable<Superhero> superheros = entities.getBody();
 		Long total = StreamSupport.stream(superheros.spliterator(), false).count();
 		assertThat(total , is(2L));
+	}
+
+
+
+	@Test
+	public void findByName()  {
+		HttpEntity<Superhero> request = new HttpEntity<>(createWonderWoman());
+		// create first superhero
+		ResponseEntity<Long> entity = this.testRestTemplate.postForEntity(SUPERHEROES_RESOURCE_URL, request, Long.class);
+		assertThat(entity.getStatusCode(), is(HttpStatus.CREATED));
+
+		request = new HttpEntity<>(createSpiderman());
+		// create second superhero
+		ResponseEntity<Long> entity2 = this.testRestTemplate.postForEntity(SUPERHEROES_RESOURCE_URL, request, Long.class);
+		assertThat(entity2.getStatusCode(), is(HttpStatus.CREATED));
+
+		// search by name
+		findByName("man", 2L);
+		findByName("Wonder", 1L);
+		findByName("Spider", 1L);
+		findByName("Flash", 0L);
+
+	}
+
+
+	protected void findByName(String name, Long expected){
+		String findByName = String.format("%s/%s?name=%s", SUPERHEROES_RESOURCE_URL, "filter", name );
+		ResponseEntity<Iterable> entities = this.testRestTemplate.getForEntity(findByName, Iterable.class);
+		assertThat(entities.getStatusCode(), is(HttpStatus.OK));
+		Iterable<Superhero> superheros = entities.getBody();
+		Long total = StreamSupport.stream(superheros.spliterator(), false).count();
+		assertThat(total , is(expected));
 	}
 
 
