@@ -10,9 +10,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.StreamSupport;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -46,12 +48,13 @@ class SuperheroesApplicationTests {
 	@Test
 	public void searchAll() throws Exception {
 
-		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("/superheroes", List.class);
+		ResponseEntity<Iterable> entity = this.testRestTemplate.getForEntity("/superheroes", Iterable.class);
 
 		assertThat(entity.getStatusCode(), is(HttpStatus.OK));
 
-		List<Superhero> superheros = entity.getBody();
-		assertThat(superheros, hasSize(3));
+		Iterable<Superhero> superheros = entity.getBody();
+		Long total = StreamSupport.stream(superheros.spliterator(), false).count();
+		assertThat(total , is(3));
 	}
 
 	@Test
