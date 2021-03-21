@@ -25,8 +25,8 @@ public class SuperheroService {
         return repository.save(superhero).getId();
     }
 
-    public void update(Superhero superheroUpdate) {
-        Superhero founded = repository.findById(superheroUpdate.getId()).orElseThrow(()-> new EntityNotFoundException(superheroUpdate.getId()));
+    public void update(Long id, Superhero superheroUpdate) {
+        Superhero founded = repository.findById(id).orElseThrow(()-> new EntityNotFoundException(superheroUpdate.getId()));
         repository.save(set(founded, superheroUpdate));
     }
 
