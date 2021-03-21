@@ -1,13 +1,12 @@
 package com.mindata.superheroes.controller;
 
 import com.mindata.superheroes.model.Superhero;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/superheroes")
@@ -38,6 +37,17 @@ public class SuperHeroController {
     @GetMapping("/{id}")
     public Superhero get(@PathParam("id") Long id){
         return s1;
+    }
+
+    @PostMapping
+    public Long create(@RequestBody Superhero superhero){
+        return Long.valueOf("4");
+    }
+
+
+    @PutMapping
+    public void update(Superhero superhero){
+        return;
     }
 
     @GetMapping
