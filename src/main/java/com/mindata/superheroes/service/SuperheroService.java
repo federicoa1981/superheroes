@@ -21,6 +21,10 @@ public class SuperheroService {
         return repository.findAll();
     }
 
+    public Iterable<Superhero> findByName(String name) {
+        return repository.findByNameContains(name);
+    }
+
     public Long create(Superhero superhero) {
         return repository.save(superhero).getId();
     }
