@@ -1,6 +1,7 @@
 package com.mindata.superheroes.controller;
 
 import com.mindata.superheroes.model.Superhero;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -39,21 +40,28 @@ public class SuperHeroController {
         return s1;
     }
 
-    @PostMapping
-    public Long create(@RequestBody Superhero superhero){
-        return Long.valueOf("4");
-    }
-
-
-    @PutMapping
-    public void update(Superhero superhero){
-        return;
-    }
-
     @GetMapping
     public List<Superhero> searchAll(){
         return Arrays.asList(s1, s2, s3);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Long create(@RequestBody Superhero superhero){
+        return Long.valueOf("4");
+    }
+
+    @PutMapping
+    public void update(@RequestBody Superhero superhero){
+        // implement update
+        return;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathParam("id") Long id){
+        // implement delete;
+    }
+
 
 
 }
