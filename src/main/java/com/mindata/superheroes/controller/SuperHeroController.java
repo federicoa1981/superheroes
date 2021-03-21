@@ -1,17 +1,24 @@
 package com.mindata.superheroes.controller;
 
 import com.mindata.superheroes.model.Superhero;
+import com.mindata.superheroes.service.SuperheroService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/superheroes")
 public class SuperHeroController {
+
+    @Autowired
+    private SuperheroService superheroService;
+
     private Superhero s1;
     private Superhero s2;
     private Superhero s3;
@@ -46,10 +53,8 @@ public class SuperHeroController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody Superhero superhero){
-        return Long.valueOf("4");
-    }
+    public ResponseEntity<Long> create(@RequestBody Superhero superhero){
+        return new ResponseEntity(Long.valueOf("4"), HttpStatus.CREATED); }
 
     @PutMapping
     public void update(@RequestBody Superhero superhero){
