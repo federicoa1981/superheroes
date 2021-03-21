@@ -1,5 +1,5 @@
 #Introduction
-This is sa rest api to do Superheroes crud and to filtering by name
+This is a rest api to allow Superheroes crud and to filtering by name
 
 ## Compile 
 mvn clean package
