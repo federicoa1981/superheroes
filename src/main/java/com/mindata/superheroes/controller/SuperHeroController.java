@@ -19,7 +19,7 @@ public class SuperHeroController {
 
 
     @GetMapping("/{id}")
-    public Superhero get(@PathParam("id") Long id){
+    public Superhero get(@PathVariable Long id){
         return superheroService.getById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
@@ -32,13 +32,13 @@ public class SuperHeroController {
     public ResponseEntity<Long> create(@RequestBody Superhero superhero){
         return new ResponseEntity(superheroService.create(superhero), HttpStatus.CREATED); }
 
-    @PutMapping
-    public void update(@RequestBody Superhero superhero){
-         superheroService.update(superhero);
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody Superhero superhero){
+         superheroService.update(id, superhero);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathParam("id") Long id){
+    public void delete(@PathVariable Long id){
         superheroService.delete(id);
     }
 
