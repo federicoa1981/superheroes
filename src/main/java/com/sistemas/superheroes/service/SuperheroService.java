@@ -13,8 +13,8 @@ public class SuperheroService {
     @Autowired
     private SuperheroRepository repository;
 
-    public Optional<Superhero> getById(Long id) {
-        return repository.findById(id);
+    public Superhero getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public Iterable<Superhero> getAll() {
@@ -30,7 +30,7 @@ public class SuperheroService {
     }
 
     public void update(Long id, Superhero superheroUpdate) {
-        Superhero founded = repository.findById(id).orElseThrow(()-> new EntityNotFoundException(superheroUpdate.getId()));
+        Superhero founded = getById(id);
         repository.save(set(founded, superheroUpdate));
     }
 
@@ -42,7 +42,7 @@ public class SuperheroService {
     }
 
     public void delete(Long id) {
-        Superhero founded = repository.findById(id).orElseThrow(()-> new EntityNotFoundException(id));
+        Superhero founded = getById(id);
         repository.delete(founded);
     }
 }

@@ -18,7 +18,7 @@ public class SuperheroController {
 
     @GetMapping("/{id}")
     public Superhero get(@PathVariable Long id){
-        return superheroService.getById(id).orElseThrow(() -> new EntityNotFoundException(id));
+        return superheroService.getById(id);
     }
 
     @GetMapping
