@@ -1,5 +1,6 @@
 #Introduction
-This is a rest api to allow Superheroes crud and to filtering by name
+This is a rest api to allow Superheroes crud and to filtering by name.
+It was implemented using spring-boot 2.x
 Features:
 - Query All superheroes.
 - Query superhero by id.
