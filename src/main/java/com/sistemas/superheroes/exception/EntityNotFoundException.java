@@ -1,4 +1,4 @@
-package com.mindata.superheroes.exception;
+package com.sistemas.superheroes.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

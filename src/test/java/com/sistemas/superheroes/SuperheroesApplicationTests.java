@@ -1,6 +1,6 @@
-package com.mindata.superheroes;
+package com.sistemas.superheroes;
 
-import com.mindata.superheroes.model.Superhero;
+import com.sistemas.superheroes.model.Superhero;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

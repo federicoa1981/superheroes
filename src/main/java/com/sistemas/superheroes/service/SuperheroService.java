@@ -1,8 +1,8 @@
-package com.mindata.superheroes.service;
+package com.sistemas.superheroes.service;
 
-import com.mindata.superheroes.exception.EntityNotFoundException;
-import com.mindata.superheroes.model.Superhero;
-import com.mindata.superheroes.repository.SuperheroRepository;
+import com.sistemas.superheroes.exception.EntityNotFoundException;
+import com.sistemas.superheroes.model.Superhero;
+import com.sistemas.superheroes.repository.SuperheroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

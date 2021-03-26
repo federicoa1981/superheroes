@@ -1,4 +1,4 @@
-package com.mindata.superheroes.model;
+package com.sistemas.superheroes.model;
 
 import lombok.Data;
 

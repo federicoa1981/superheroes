@@ -1,4 +1,4 @@
-package com.mindata.superheroes;
+package com.sistemas.superheroes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

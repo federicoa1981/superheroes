@@ -1,4 +1,4 @@
-package com.mindata.superheroes.configuration;
+package com.sistemas.superheroes.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

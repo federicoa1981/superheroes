@@ -1,6 +1,6 @@
-package com.mindata.superheroes.repository;
+package com.sistemas.superheroes.repository;
 
-import com.mindata.superheroes.model.Superhero;
+import com.sistemas.superheroes.model.Superhero;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
